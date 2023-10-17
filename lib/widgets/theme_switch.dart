@@ -18,21 +18,19 @@ class ThemeSwitchWidget extends StatefulWidget {
 class _ThemeSwitchWidgetState extends State<ThemeSwitchWidget> {
   Widget _buildTitle() {
     return BlocBuilder<ThemeCubit, ThemeState>(
-      builder: (context, ThemeState themeState) => Container(
-        child: Row(
-          children: [
-            Assets.icons.themeIcon.image(
-              width: 24.w,
-              height: 24.w,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            10.widthBox,
-            Text(
-              AppStrings.theme,
-              style: Theme.of(context).primaryTextTheme.titleMedium,
-            )
-          ],
-        ),
+      builder: (context, ThemeState themeState) => Row(
+        children: [
+          Assets.icons.themeIcon.image(
+            width: 24.w,
+            height: 24.w,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+          10.widthBox,
+          Text(
+            AppStrings.theme,
+            style: Theme.of(context).primaryTextTheme.titleMedium,
+          )
+        ],
       ),
     );
   }

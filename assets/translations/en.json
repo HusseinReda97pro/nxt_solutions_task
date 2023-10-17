@@ -2,5 +2,15 @@
   "theme": "Theme",
   "openReservation": "Open Reservation",
   "showAndroidTicket": "Show Android Ticket",
-  "showIOSTicket": "Show IOS Ticket"
+  "showIOSTicket": "Show IOS Ticket",
+  "hotelCheckIn": "Hotel Check-in",
+  "hotel": "Hotel",
+  "from": "From",
+  "till": "Till",
+  "stars": "Stars",
+  "roomCount": "Room Count",
+  "rooms": "Rooms",
+  "location": "Location"
+
+
 }

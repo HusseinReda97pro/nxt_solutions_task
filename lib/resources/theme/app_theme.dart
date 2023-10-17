@@ -36,7 +36,7 @@ class AppTheme {
           surfaceVariant: appColors.lighterContainerColor,
         ),
         dividerTheme: DividerThemeData(
-          color: appColors.primary,
+          color: appColors.borderColor,
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.transparent,
@@ -49,16 +49,19 @@ class AppTheme {
         iconTheme: IconThemeData(
           color: appColors.textOnBackGround,
         ),
-        scaffoldBackgroundColor: appColors.background,
+        scaffoldBackgroundColor: appColors.scaffoldBackgroundColor,
         cardColor: appColors.cardColor,
         cardTheme: CardTheme(color: appColors.cardColor),
         hintColor: appColors.hintColor,
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: appColors.navBarColor,
         ),
+        indicatorColor: appColors.indicatorColor,
         primaryTextTheme: TextTheme(
-          titleMedium: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
+          labelSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
           titleSmall: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
+          titleMedium: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),
+          titleLarge: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700),
         ).apply(
           fontFamily: "SFDisplay",
           displayColor: appColors.textOnBackGround,

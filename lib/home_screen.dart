@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nxt_solutions_task/reservations/bloc/reservations_bloc.dart';
+import 'package:nxt_solutions_task/reservations/presentation/ReservationSheet.dart';
 import 'package:nxt_solutions_task/resources/app_strings.dart';
 import 'package:nxt_solutions_task/utilities/extensions/size_extension_box.dart';
 import 'package:nxt_solutions_task/widgets/theme_switch.dart';
@@ -14,6 +13,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void _openReservationSheet() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          //the rounded corner is created here
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
+        ),
+        context: context,
+        builder: (BuildContext context) => const ReservationSheet());
+  }
+
   Widget _buildFlutterButton() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 10.w),
@@ -24,11 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor:
               MaterialStatePropertyAll(Theme.of(context).colorScheme.tertiary),
         ),
-        onPressed: () {
-          context.read<ReservationsBloc>().add(
-                LoadReservationsEvent(),
-              );
-        },
+        onPressed: _openReservationSheet,
         child: Text(
           AppStrings.openReservation,
           style: Theme.of(context).primaryTextTheme.titleSmall!.copyWith(
@@ -82,18 +89,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            40.heightBox,
-            const ThemeSwitchWidget(),
-            const Spacer(),
-            _buildFlutterButton(),
-            _buildAndroidButton(),
-            _buildIOSButton()
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              40.heightBox,
+              const ThemeSwitchWidget(),
+              const Spacer(),
+              _buildFlutterButton(),
+              _buildAndroidButton(),
+              _buildIOSButton()
+            ],
+          ),
         ),
       ),
     );

@@ -14,7 +14,7 @@ class DarkTheme extends AppTheme {
           Platform.isIOS ? Brightness.dark : Brightness.light,
       statusBarBrightness: Platform.isIOS ? Brightness.dark : Brightness.light,
     ).copyWith(
-      statusBarColor: appColors.background,
+      statusBarColor: appColors.scaffoldBackgroundColor,
     );
     super.statusBar = drkStatusBar;
   }

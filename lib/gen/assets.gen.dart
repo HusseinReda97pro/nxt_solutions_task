@@ -85,6 +85,20 @@ class $AssetsIconsGen {
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/map.png
+  AssetGenImage get map => const AssetGenImage('assets/images/map.png');
+
+  /// File path: assets/images/sheet_header.png
+  AssetGenImage get sheetHeader =>
+      const AssetGenImage('assets/images/sheet_header.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [map, sheetHeader];
+}
+
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
 
@@ -99,6 +113,7 @@ class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 

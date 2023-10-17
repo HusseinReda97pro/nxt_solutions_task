@@ -14,7 +14,7 @@ class LightTheme extends AppTheme {
       statusBarIconBrightness:
           Platform.isIOS ? Brightness.light : Brightness.dark,
       statusBarBrightness: Platform.isIOS ? Brightness.light : Brightness.dark,
-    ).copyWith(statusBarColor: appColors.background);
+    ).copyWith(statusBarColor: appColors.scaffoldBackgroundColor);
 
     super.statusBar = lightStatusBar;
   }

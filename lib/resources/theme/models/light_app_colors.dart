@@ -4,7 +4,9 @@ import 'app_colors.dart';
 
 class LightAppColors extends AppColors {
   @override
-  Color get background => const Color(0xFFF9F9F9);
+  Color get background => const Color(0xFFfafafa);
+  @override
+  Color get scaffoldBackgroundColor => const Color(0xFFefefef);
   @override
   Color get primary => const Color(0xFF413960);
   @override

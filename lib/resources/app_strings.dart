@@ -15,4 +15,7 @@ abstract class AppStrings {
   static final roomCount = 'roomCount'.tr();
   static final rooms = 'rooms'.tr();
   static final location = 'location'.tr();
+  static final ticketType = 'ticketType'.tr();
+  static final seat = 'seat'.tr();
+  static final tickets = 'tickets'.tr();
 }

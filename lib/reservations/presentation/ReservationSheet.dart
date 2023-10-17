@@ -7,10 +7,14 @@ import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_locat
 import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_name.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_rate.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/reservation_date.dart';
+import 'package:nxt_solutions_task/reservations/presentation/widgets/reservation_ticket.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/sheet_header.dart';
 import 'package:nxt_solutions_task/utilities/extensions/size_extension_box.dart';
+import 'package:nxt_solutions_task/widgets/dashed_line.dart';
 
+import '../../resources/app_strings.dart';
 import '../bloc/reservations_bloc.dart';
+import '../data/models/UserTicket.dart';
 
 class ReservationSheet extends StatefulWidget {
   const ReservationSheet({Key? key}) : super(key: key);
@@ -32,6 +36,27 @@ class _ReservationSheetState extends State<ReservationSheet> {
 
   Widget _buildHeaderImage() {
     return Assets.images.sheetHeader.image();
+  }
+
+  Widget _buildTickets(List<UserTicket> userTickets) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          "${AppStrings.tickets}:",
+          style: Theme.of(context).primaryTextTheme.titleLarge,
+        ),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: userTickets.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ReservationTicket(
+                userTicket: userTickets[index],
+              );
+            })
+      ],
+    );
   }
 
   @override
@@ -64,6 +89,12 @@ class _ReservationSheetState extends State<ReservationSheet> {
                 HotelLocation(
                   hotelName: reservation.stays[0].name,
                   address: reservation.stays[0].address,
+                ),
+                verticalPadding,
+                _buildTickets(reservation.userTickets),
+                verticalPadding,
+                DashedLine(
+                  color: Theme.of(context).dividerColor,
                 )
               ],
             ),

@@ -10,7 +10,10 @@
   "stars": "Stars",
   "roomCount": "Room Count",
   "rooms": "Rooms",
-  "location": "Location"
+  "location": "Location",
+  "seat": "Seat",
+  "ticketType": "Ticket Type",
+  "tickets": "Tickets"
 
 
 }

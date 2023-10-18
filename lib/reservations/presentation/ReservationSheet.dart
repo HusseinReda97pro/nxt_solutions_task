@@ -7,7 +7,9 @@ import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_locat
 import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_name.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/hotel_rate.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/reservation_date.dart';
+import 'package:nxt_solutions_task/reservations/presentation/widgets/reservation_gallery.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/reservation_ticket.dart';
+import 'package:nxt_solutions_task/reservations/presentation/widgets/room_reservation.dart';
 import 'package:nxt_solutions_task/reservations/presentation/widgets/sheet_header.dart';
 import 'package:nxt_solutions_task/utilities/extensions/size_extension_box.dart';
 import 'package:nxt_solutions_task/widgets/dashed_line.dart';
@@ -35,7 +37,7 @@ class _ReservationSheetState extends State<ReservationSheet> {
   }
 
   Widget _buildHeaderImage() {
-    return Assets.images.sheetHeader.image();
+    return Assets.images.sheetHeader.image(width: 1.sw, fit: BoxFit.fill);
   }
 
   Widget _buildTickets(List<UserTicket> userTickets) {
@@ -59,13 +61,38 @@ class _ReservationSheetState extends State<ReservationSheet> {
     );
   }
 
+  Widget _buildFooter() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          AppStrings.amenities,
+          style: Theme.of(context).primaryTextTheme.titleMedium,
+        ),
+        5.heightBox,
+        Text(
+          AppStrings.amenitiesMessage,
+          style: Theme.of(context).primaryTextTheme.displaySmall!.copyWith(
+                color: Theme.of(context).hintColor,
+              ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final verticalPadding = 40.heightBox;
     Reservation reservation = context.read<ReservationsBloc>().reservations[0];
     return Container(
       height: 0.85.sh,
-      color: Theme.of(context).colorScheme.background,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(25.r),
+          topRight: Radius.circular(25.r),
+        ),
+      ),
       child: ListView(
         children: [
           const SheetHeader(),
@@ -95,7 +122,17 @@ class _ReservationSheetState extends State<ReservationSheet> {
                 verticalPadding,
                 DashedLine(
                   color: Theme.of(context).dividerColor,
-                )
+                ),
+                verticalPadding,
+                RoomReservation(
+                  room: reservation.stays[0].rooms[0],
+                  roomNumber: 1,
+                ),
+                40.heightBox,
+                ReservationGallery(imageURLs: reservation.stays[0].stayImages),
+                40.heightBox,
+                _buildFooter(),
+                40.heightBox,
               ],
             ),
           ),

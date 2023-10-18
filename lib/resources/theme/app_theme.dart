@@ -58,6 +58,7 @@ class AppTheme {
         ),
         indicatorColor: appColors.indicatorColor,
         primaryTextTheme: TextTheme(
+          displaySmall: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w400),
           labelSmall: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
           titleSmall: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w700),
           titleMedium: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700),

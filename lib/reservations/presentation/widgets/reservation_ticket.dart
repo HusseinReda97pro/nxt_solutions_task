@@ -102,17 +102,38 @@ class ReservationTicket extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 16.heightBox,
-                Text(
-                  "${AppStrings.ticketType}: ${userTicket.ticketTypeName}",
-                  style: Theme.of(context).primaryTextTheme.titleMedium,
+                Row(
+                  children: [
+                    Text(
+                      "${AppStrings.ticketType}: ",
+                      style: Theme.of(context).primaryTextTheme.titleMedium,
+                    ),
+                    Text(
+                      userTicket.ticketTypeName,
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .displaySmall!
+                          .copyWith(
+                            color: Theme.of(context).hintColor,
+                          ),
+                    ),
+                  ],
                 ),
                 6.heightBox,
-                Text(
-                  "${AppStrings.seat}: ${userTicket.seat}",
-                  style:
-                      Theme.of(context).primaryTextTheme.titleMedium!.copyWith(
-                            color: Theme.of(context).indicatorColor,
+                Row(
+                  children: [
+                    Text("${AppStrings.seat}: ",
+                        style: Theme.of(context).primaryTextTheme.titleMedium),
+                    Text(
+                      userTicket.seat,
+                      style: Theme.of(context)
+                          .primaryTextTheme
+                          .displaySmall!
+                          .copyWith(
+                            color: Theme.of(context).hintColor,
                           ),
+                    ),
+                  ],
                 ),
                 10.heightBox,
               ],

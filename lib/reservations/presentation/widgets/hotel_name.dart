@@ -18,7 +18,7 @@ class HotelName extends StatelessWidget {
         10.heightBox,
         Text(
           "$hotelName  ${AppStrings.hotel}",
-          style: Theme.of(context).primaryTextTheme.titleSmall!.copyWith(
+          style: Theme.of(context).primaryTextTheme.displaySmall!.copyWith(
                 color: Theme.of(context).hintColor,
               ),
         ),

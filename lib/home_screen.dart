@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(
           //the rounded corner is created here
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.r), topRight: Radius.circular(20.r)),
+              topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
         ),
         context: context,
         builder: (BuildContext context) => const ReservationSheet());

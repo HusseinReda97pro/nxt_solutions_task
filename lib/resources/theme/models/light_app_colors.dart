@@ -27,4 +27,6 @@ class LightAppColors extends AppColors {
   Color get textOnBackGround => Colors.black;
   @override
   Color get textOnButton => const Color(0xFFe0e6f3);
+  @override
+  Color get hintColor => Colors.black;
 }

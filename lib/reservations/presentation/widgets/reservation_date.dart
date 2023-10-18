@@ -28,9 +28,10 @@ class ReservationDate extends StatelessWidget {
               10.heightBox,
               Text(
                 dateFormat.format(DateTime.parse(startDate)),
-                style: Theme.of(context).primaryTextTheme.titleSmall!.copyWith(
-                      color: Theme.of(context).hintColor,
-                    ),
+                style:
+                    Theme.of(context).primaryTextTheme.displaySmall!.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
               ),
             ],
           ),
@@ -46,9 +47,10 @@ class ReservationDate extends StatelessWidget {
               10.heightBox,
               Text(
                 dateFormat.format(DateTime.parse(endDate)),
-                style: Theme.of(context).primaryTextTheme.titleSmall!.copyWith(
-                      color: Theme.of(context).hintColor,
-                    ),
+                style:
+                    Theme.of(context).primaryTextTheme.displaySmall!.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
               ),
             ],
           ),

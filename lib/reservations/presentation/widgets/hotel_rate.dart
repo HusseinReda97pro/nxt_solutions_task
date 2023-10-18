@@ -53,9 +53,10 @@ class HotelRate extends StatelessWidget {
               10.heightBox,
               Text(
                 "${roomCount.toString()} ${AppStrings.rooms}",
-                style: Theme.of(context).primaryTextTheme.titleSmall!.copyWith(
-                      color: Theme.of(context).hintColor,
-                    ),
+                style:
+                    Theme.of(context).primaryTextTheme.displaySmall!.copyWith(
+                          color: Theme.of(context).hintColor,
+                        ),
               ),
             ],
           ),

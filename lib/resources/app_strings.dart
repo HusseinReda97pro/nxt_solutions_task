@@ -18,4 +18,12 @@ abstract class AppStrings {
   static final ticketType = 'ticketType'.tr();
   static final seat = 'seat'.tr();
   static final tickets = 'tickets'.tr();
+  static final roomReservation = 'roomReservation'.tr();
+  static final guest = 'guest'.tr();
+  static final roomType = 'roomType'.tr();
+  static final roomNumber = 'roomNumber'.tr();
+  static final sleeps = 'sleeps'.tr();
+  static final gallery = 'gallery'.tr();
+  static final amenities = 'amenities'.tr();
+  static final amenitiesMessage = 'amenitiesMessage'.tr();
 }

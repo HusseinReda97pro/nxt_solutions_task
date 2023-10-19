@@ -23,5 +23,6 @@ class ReservationsBloc extends Bloc<ReservationsEvent, ReservationsState> {
     } catch (e) {
       emit(ErrorReservationsState(message: e.toString()));
     }
+    emit(LoadedReservationsState());
   }
 }

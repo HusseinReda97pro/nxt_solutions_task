@@ -21,7 +21,9 @@
   "sleeps": "Sleeps",
   "gallery": "Gallery",
   "amenities": "Amenities",
-  "amenitiesMessage": "Swiming pool, Contenental breakfast, Spa"
+  "amenitiesMessage": "Swiming pool, Contenental breakfast, Spa",
+  "noDataFound": "No Data Found",
+  "somethingWentWrong": "Something Went Wrong"
 
 
 

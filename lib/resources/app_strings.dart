@@ -26,4 +26,6 @@ abstract class AppStrings {
   static final gallery = 'gallery'.tr();
   static final amenities = 'amenities'.tr();
   static final amenitiesMessage = 'amenitiesMessage'.tr();
+  static final noDataFound = 'noDataFound'.tr();
+  static final somethingWentWrong = 'somethingWentWrong'.tr();
 }

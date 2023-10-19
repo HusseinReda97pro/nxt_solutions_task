@@ -83,61 +83,82 @@ class _ReservationSheetState extends State<ReservationSheet> {
   @override
   Widget build(BuildContext context) {
     final verticalPadding = 40.heightBox;
-    Reservation reservation = context.read<ReservationsBloc>().reservations[0];
-    return Container(
-      height: 0.85.sh,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(25.r),
-          topRight: Radius.circular(25.r),
-        ),
-      ),
-      child: ListView(
-        children: [
-          const SheetHeader(),
-          _buildHeaderImage(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
-            child: Column(
-              children: [
-                HotelName(hotelName: reservation.stays[0].name),
-                verticalPadding,
-                ReservationDate(
-                  startDate: reservation.startDate,
-                  endDate: reservation.endDate,
-                ),
-                verticalPadding,
-                HotelRate(
-                  stars: reservation.stays[0].stars,
-                  roomCount: reservation.stays[0].rooms.length,
-                ),
-                verticalPadding,
-                HotelLocation(
-                  hotelName: reservation.stays[0].name,
-                  address: reservation.stays[0].address,
-                ),
-                verticalPadding,
-                _buildTickets(reservation.userTickets),
-                verticalPadding,
-                DashedLine(
-                  color: Theme.of(context).dividerColor,
-                ),
-                verticalPadding,
-                RoomReservation(
-                  room: reservation.stays[0].rooms[0],
-                  roomNumber: 1,
-                ),
-                40.heightBox,
-                ReservationGallery(imageURLs: reservation.stays[0].stayImages),
-                40.heightBox,
-                _buildFooter(),
-                40.heightBox,
-              ],
+
+    return BlocBuilder<ReservationsBloc, ReservationsState>(
+      builder: (context, state) {
+        if (state is LoadingReservationsState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is ErrorReservationsState) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
+        if (context.read<ReservationsBloc>().reservations.isEmpty) {
+          return Center(child: Text(AppStrings.noDataFound));
+        }
+        Reservation reservation =
+            context.read<ReservationsBloc>().reservations[0];
+
+        return Container(
+          height: 0.85.sh,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.background,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25.r),
+              topRight: Radius.circular(25.r),
             ),
           ),
-        ],
-      ),
+          child: ListView(
+            children: [
+              const SheetHeader(),
+              _buildHeaderImage(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
+                child: Column(
+                  children: [
+                    HotelName(hotelName: reservation.stays[0].name),
+                    verticalPadding,
+                    ReservationDate(
+                      startDate: reservation.startDate,
+                      endDate: reservation.endDate,
+                    ),
+                    verticalPadding,
+                    HotelRate(
+                      stars: reservation.stays[0].stars,
+                      roomCount: reservation.stays[0].rooms.length,
+                    ),
+                    verticalPadding,
+                    HotelLocation(
+                      hotelName: reservation.stays[0].name,
+                      address: reservation.stays[0].address,
+                    ),
+                    verticalPadding,
+                    _buildTickets(reservation.userTickets),
+                    verticalPadding,
+                    DashedLine(
+                      color: Theme.of(context).dividerColor,
+                    ),
+                    verticalPadding,
+                    RoomReservation(
+                      room: reservation.stays[0].rooms[0],
+                      roomNumber: 1,
+                    ),
+                    40.heightBox,
+                    ReservationGallery(
+                        imageURLs: reservation.stays[0].stayImages),
+                    40.heightBox,
+                    _buildFooter(),
+                    40.heightBox,
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

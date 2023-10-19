@@ -25,24 +25,26 @@ class NetworkHelper {
   void _initDio() async {
     _dio = Dio(baseOptions);
 
-    Directory cacheDir = await getTemporaryDirectory();
-    final cacheOptions = CacheOptions(
-      store: HiveCacheStore(cacheDir.path, hiveBoxName: "reservations"),
-      policy: CachePolicy.forceCache,
-      hitCacheOnErrorExcept: [401, 403],
-      maxStale: const Duration(days: 7),
-      priority: CachePriority.high,
-      cipher: null,
-      // keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-      keyBuilder: (request) {
-        print("request");
-        print(request.data);
-        return request.uri.toString();
-      },
-      allowPostMethod: false,
-    );
+    try {
+      Directory cacheDir = await getTemporaryDirectory();
+      final cacheOptions = CacheOptions(
+        store: HiveCacheStore(cacheDir.path, hiveBoxName: "reservations"),
+        policy: CachePolicy.forceCache,
+        hitCacheOnErrorExcept: [401, 403],
+        maxStale: const Duration(days: 7),
+        priority: CachePriority.high,
+        cipher: null,
+        // keyBuilder: CacheOptions.defaultCacheKeyBuilder,
+        keyBuilder: (request) {
+          print("request");
+          print(request.data);
+          return request.uri.toString();
+        },
+        allowPostMethod: false,
+      );
 
-    _dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
+      _dio.interceptors.add(DioCacheInterceptor(options: cacheOptions));
+    } catch (_) {}
 
 // customization
     if (debugging) {

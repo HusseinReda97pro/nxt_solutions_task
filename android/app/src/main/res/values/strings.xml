@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">bottomsheet</string>
+    <string name="Tickets">Tickets:</string>
+    <string name="ticket_type">Ticket Type:</string>
+    <string name="seat">Seat:</string>
+
+</resources>

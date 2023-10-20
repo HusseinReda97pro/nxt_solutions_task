@@ -82,9 +82,9 @@ class ReservationTicket extends StatelessWidget {
                         "#${userTicket.ticketId}",
                         style: Theme.of(context)
                             .primaryTextTheme
-                            .titleMedium!
+                            .displaySmall!
                             .copyWith(
-                              color: Theme.of(context).indicatorColor,
+                              color: Theme.of(context).hintColor,
                             ),
                       ),
                     ],

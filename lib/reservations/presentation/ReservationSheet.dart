@@ -29,9 +29,11 @@ class _ReservationSheetState extends State<ReservationSheet> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ReservationsBloc>().add(
-            LoadReservationsEvent(),
-          );
+      if (context.read<ReservationsBloc>().reservations.isEmpty) {
+        context.read<ReservationsBloc>().add(
+              LoadReservationsEvent(),
+            );
+      }
     });
     super.initState();
   }

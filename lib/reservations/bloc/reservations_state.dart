@@ -15,8 +15,10 @@ class LoadingReservationsState extends ReservationsState {
 }
 
 class LoadedReservationsState extends ReservationsState {
+  final Reservation reservation;
+  const LoadedReservationsState({required this.reservation});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [reservation];
 }
 
 class ErrorReservationsState extends ReservationsState {

@@ -16,6 +16,7 @@ import 'package:nxt_solutions_task/widgets/dashed_line.dart';
 
 import '../../resources/app_strings.dart';
 import '../bloc/reservations_bloc.dart';
+import '../data/models/Stay.dart';
 import '../data/models/UserTicket.dart';
 
 class ReservationSheet extends StatefulWidget {
@@ -31,7 +32,7 @@ class _ReservationSheetState extends State<ReservationSheet> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (context.read<ReservationsBloc>().reservations.isEmpty) {
+      if (context.read<ReservationsBloc>().state is! LoadedReservationsState) {
         context.read<ReservationsBloc>().add(
               LoadReservationsEvent(),
             );
@@ -100,71 +101,77 @@ class _ReservationSheetState extends State<ReservationSheet> {
             child: Text(state.message),
           );
         }
-        if (context.read<ReservationsBloc>().reservations.isEmpty) {
-          return Center(child: Text(AppStrings.noDataFound));
-        }
-        Reservation reservation =
-            context.read<ReservationsBloc>().reservations[0];
 
-        return Container(
-          height: 0.85.sh,
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25.r),
-              topRight: Radius.circular(25.r),
-            ),
-          ),
-          child: ListView(
-            controller: widget.scrollController,
-
-            // physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const SheetHeader(),
-              _buildHeaderImage(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
-                child: Column(
-                  children: [
-                    HotelName(hotelName: reservation.stays[0].name),
-                    verticalPadding,
-                    ReservationDate(
-                      startDate: reservation.startDate,
-                      endDate: reservation.endDate,
-                    ),
-                    verticalPadding,
-                    HotelRate(
-                      stars: reservation.stays[0].stars,
-                      roomCount: reservation.stays[0].rooms.length,
-                    ),
-                    verticalPadding,
-                    HotelLocation(
-                      hotelName: reservation.stays[0].name,
-                      address: reservation.stays[0].address,
-                    ),
-                    verticalPadding,
-                    _buildTickets(reservation.userTickets),
-                    verticalPadding,
-                    DashedLine(
-                      color: Theme.of(context).dividerColor,
-                    ),
-                    verticalPadding,
-                    RoomReservation(
-                      room: reservation.stays[0].rooms[0],
-                      roomNumber: 1,
-                    ),
-                    40.heightBox,
-                    ReservationGallery(
-                        imageURLs: reservation.stays[0].stayImages),
-                    40.heightBox,
-                    _buildFooter(),
-                    40.heightBox,
-                  ],
-                ),
+        if (state is LoadedReservationsState) {
+          Reservation reservation = state.reservation;
+          List<Stay> stays = reservation.stays;
+          Stay? stay;
+          if (stays.isNotEmpty) {
+            stay = stays[0];
+          }
+          return Container(
+            height: 0.85.sh,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.background,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.r),
+                topRight: Radius.circular(25.r),
               ),
-            ],
-          ),
-        );
+            ),
+            child: ListView(
+              controller: widget.scrollController,
+
+              // physics: const NeverScrollableScrollPhysics(),
+              children: [
+                const SheetHeader(),
+                _buildHeaderImage(),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
+                  child: Column(
+                    children: [
+                      HotelName(hotelName: stay?.name ?? ""),
+                      verticalPadding,
+                      ReservationDate(
+                        startDate: reservation.startDate,
+                        endDate: reservation.endDate,
+                      ),
+                      verticalPadding,
+                      HotelRate(
+                        stars: stay?.stars ?? 0,
+                        roomCount: stay?.rooms.length ?? 0,
+                      ),
+                      verticalPadding,
+                      HotelLocation(
+                        hotelName: stay?.name ?? '',
+                        address: stay?.address ?? '',
+                      ),
+                      verticalPadding,
+                      _buildTickets(reservation.userTickets),
+                      verticalPadding,
+                      DashedLine(
+                        color: Theme.of(context).dividerColor,
+                      ),
+                      verticalPadding,
+                      stay != null && stay.rooms.isNotEmpty
+                          ? RoomReservation(
+                              room: stay.rooms[0],
+                              roomNumber: 1,
+                            )
+                          : const SizedBox.shrink(),
+                      40.heightBox,
+                      ReservationGallery(imageURLs: stay?.stayImages ?? []),
+                      40.heightBox,
+                      _buildFooter(),
+                      40.heightBox,
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
       },
     );
   }

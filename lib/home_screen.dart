@@ -1,3 +1,4 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,15 +31,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openReservationSheet() {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        shape: RoundedRectangleBorder(
-          //the rounded corner is created here
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25.r), topRight: Radius.circular(25.r)),
-        ),
-        context: context,
-        builder: (BuildContext context) => const ReservationSheet());
+    showFlexibleBottomSheet(
+      minHeight: 0,
+      initHeight: 0.8,
+      maxHeight: 1,
+      context: context,
+      builder: _buildBottomSheet,
+      anchors: [0, 0.5, 1],
+      isSafeArea: true,
+    );
+  }
+
+  Widget _buildBottomSheet(
+      BuildContext context, ScrollController controller, _) {
+    return ReservationSheet(
+      scrollController: controller,
+    );
   }
 
   Widget _buildFlutterButton() {

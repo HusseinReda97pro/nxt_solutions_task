@@ -19,7 +19,9 @@ import '../bloc/reservations_bloc.dart';
 import '../data/models/UserTicket.dart';
 
 class ReservationSheet extends StatefulWidget {
-  const ReservationSheet({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+  const ReservationSheet({Key? key, required this.scrollController})
+      : super(key: key);
 
   @override
   State<ReservationSheet> createState() => _ReservationSheetState();
@@ -114,6 +116,9 @@ class _ReservationSheetState extends State<ReservationSheet> {
             ),
           ),
           child: ListView(
+            controller: widget.scrollController,
+
+            // physics: const NeverScrollableScrollPhysics(),
             children: [
               const SheetHeader(),
               _buildHeaderImage(),
